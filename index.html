@@ -163,6 +163,11 @@
       }
 
       @media screen and (max-width: 768px) {
+        canvas#penger {
+          min-height: 150px;
+          max-height: 150px;
+        }
+
         .left {
           max-height: unset;
         }
@@ -525,17 +530,18 @@
       const penger_img = new Image();
 
       penger_img.onload = function() {
-        const penger_size = 40;
         let x = 10; let y = 10;
         let dx = 1; let dy = 1;
         let x_dir = 1; let y_dir = 1;
 
-        ctx.drawImage(penger_img, x, y, penger_size, penger_size);
-
         const renderOneFrame = () => {
+          let penger_size = 40;
           const w = penger_canvas.width;
           const h = penger_canvas.height;
           ctx.clearRect(0, 0, w, h);
+
+          if (h < 40) penger_size = 15;
+
           if (x + penger_size >= w) {
             x_dir = -1;
           } else if (x <= 0) {
@@ -555,6 +561,15 @@
       };
 
       penger_img.src = "assets/jetger.gif";
+
+      const resizeCanvas = () => {
+        const rect = penger_canvas.getBoundingClientRect();
+        penger_canvas.width = rect.width;
+        penger_canvas.height = rect.height;
+      };
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
     </script>
   </body>
 </>
