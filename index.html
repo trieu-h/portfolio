@@ -7,13 +7,13 @@
     <script src="penger.js"></script>
     <style>
       body {
-        height: 100vh;
+        height: 100dvh;
         width: 100%;
       }
 
       .main {
         height: 100%;
-        min-height: 100vh;
+        min-height: 100dvh;
       }
 
       .content {
@@ -26,7 +26,7 @@
 
       .experience {
         flex: 11;
-        max-height: calc(100vh - 90px);
+        max-height: calc(100dvh - 90px);
         overflow-y: auto;
       }
 
@@ -41,7 +41,7 @@
         gap: 30px;
         flex: 5;
         min-height: 0;
-        max-height: calc(100vh - 90px);
+        max-height: calc(100dvh - 90px);
       }
 
       .experience-content {
@@ -168,7 +168,7 @@
         padding-right: 15px;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(3, 1fr);
-        max-height: calc(100vh - 90px);
+        max-height: calc(100dvh - 90px);
         gap: 20px;
         overflow-y: auto;
         grid-template-areas:
@@ -220,6 +220,7 @@
           display: flex;
           flex-direction: column;
           min-height: 0;
+          min-width: 0;
         }
 
         fieldset {
@@ -240,6 +241,28 @@
           flex: none;
           align-self: center;
           max-width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 576px) {
+        #projects-section {
+          display: block;
+          height: calc(100dvh - 90px);
+        }
+
+        .projects-grid {
+          fieldset {
+            font-size: xx-small;
+          }
+
+          .tui-shadow-2 {
+            box-shadow: 10px 10px #000 !important;
+          }
+        }
+
+        .content {
+          height: 100%;
+          justify-content: center;
         }
       }
 
@@ -296,13 +319,15 @@
           gap: 5px;
         }
 
-        .tui-statusbar {
-          position: relative !important;
+        #main_background:has(#home-section.active) {
+          .tui-statusbar {
+            position: relative !important;
+          }
         }
 
         .main {
           height: auto;
-          min-height: 100vh;
+          min-height: 100dvh;
         }
       }
     </style>
@@ -815,35 +840,35 @@
         const animationMap = {
           "ex1": {
             initial: -80,
-            step: 5
+            step: 3
           },
           "ex2": {
             initial: -100,
-            step: 5
+            step: 3
           },
           "ex3": {
             initial: -120,
-            step: 5
+            step: 3
           },
           "ex4": {
             initial: -70,
-            step: 5
+            step: 3
           },
           "ex5": {
             initial: -140,
-            step: 5
+            step: 3
           },
           "ex6": {
             initial: -160,
-            step: 5
+            step: 3
           },
           "ex7": {
             initial: -60,
-            step: 5
+            step: 3
           },
           "ex8": {
             initial: -200,
-            step: 5
+            step: 3
           },
         }
 
@@ -852,7 +877,8 @@
 
           const interval = setInterval(() => {
             z += anim.step;
-            if (z === 0) {
+            if (z >= 0) {
+              z = 0;
               clearInterval(interval);
             }
             const ex_elem = document.getElementById(ex);
