@@ -106,6 +106,8 @@ function initHomePage() {
 }
 
 function initProjectsPage() {
+  init_ex_values();
+
   const animationMap = {
     "ex1": {
       initial: -80,
@@ -156,7 +158,13 @@ function initProjectsPage() {
   }
 
   const ex1 = document.getElementById("ex1");
+  const ex2 = document.getElementById("ex2");
   const ex3 = document.getElementById("ex3");
+  const ex4 = document.getElementById("ex4");
+  const ex5 = document.getElementById("ex5");
+  const ex6 = document.getElementById("ex6");
+  const ex7 = document.getElementById("ex7");
+  const ex8 = document.getElementById("ex8");
   const penger_img = document.getElementById("penger_img");
 
   document.addEventListener("mousemove", (e) => {
@@ -198,6 +206,90 @@ function initProjectsPage() {
   })
 }
 
+function wait_for_animation(element) {
+  return new Promise((resolve) => {
+    element.addEventListener('transitionend', (event) => {
+      resolve(event);
+    }, { once: true });
+  });
+};
+
+let current_target = null;
+let all_exs        = [];
+let dir            = [];
+let axis           = [];
+let is_selected    = false;
+
+function init_ex_values() {
+  all_exs = [ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8];
+  dir     = [-1, -1, -1, -1, 1, 1, 1, 1];
+  axis    = ["Y", "Y", "Y", "X", "X", "Y", "Y", "Y"];
+}
+
+async function select_project(event) {
+  if (is_selected) return;
+
+  current_target = event.currentTarget;
+  const all_animation_finished = all_exs
+    .filter(ex => ex !== current_target)
+    .map(ex => wait_for_animation(ex));
+
+  const value = 120;
+
+  for (let i = 0; i < all_exs.length; i++) {
+    if (all_exs[i] === current_target) continue;
+    all_exs[i].style.transition = "all 0.5s linear";
+    all_exs[i].style.transform  = `translate${axis[i]}(${value * dir[i]}%)`;
+  }
+
+  await Promise.all(all_animation_finished);
+
+  for (let i = 0; i < all_exs.length; i++) {
+    if (all_exs[i] === current_target) continue;
+    all_exs[i].style.display = "none";
+  }
+
+  penger.style.display = "none";
+  projects_grid.style.gridTemplateRows = "1fr";
+  projects_grid.style.gridTemplateColumns = "1fr";
+  current_target.classList.add("focused");
+
+  is_selected = true;
+}
+
+function minimize_window(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  current_target.classList.remove("focused");
+
+  projects_grid.style.gridTemplateRows = "repeat(3, 1fr)";
+  projects_grid.style.gridTemplateColumns = "repeat(3, 1fr)";
+
+  void projects_grid.offsetWidth;
+
+  const exs = [ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8].filter(ex => ex !== current_target);
+
+  const value = 120;
+  for (let i = 0; i < all_exs.length; i++) {
+    if (all_exs[i] === current_target) continue;
+    all_exs[i].style.display = "flex";
+    all_exs[i].style.transition = "all 0.5s linear";
+    all_exs[i].style.transform  = `translate${axis[i]}(${value * dir[i]}%)`;
+  }
+
+  void ex1.offsetWidth;
+
+  for (let i = 0; i < all_exs.length; i++) {
+    if (all_exs[i] === current_target) continue;
+    all_exs[i].style.transition = "all 0.5s linear";
+    all_exs[i].style.transform  = `translate${axis[i]}(0)`;
+  }
+
+  penger.style.display = "flex";
+  is_selected = false;
+}
+
 function main() {
   paddle_area_w = paddle_area.offsetWidth;
   animate_penger_header();
@@ -213,7 +305,6 @@ function main() {
   let redirect_target = null;
   let current_theme = 'tui-bg-green-white';
   main_background.classList.add(current_theme);
-
 
   github_btn.addEventListener('click', (event) => {
     redirect_target = "https://github.com/trieu-h";
@@ -248,9 +339,6 @@ function main() {
     current_theme = event.target.getAttribute('data-background');
     main_background.classList.add(current_theme);
   })
-
-
-  // Projects page
 }
 
 

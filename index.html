@@ -1,351 +1,10 @@
 <!DOCTYPE html>
   <head>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Trieu Le</title>
     <link rel="stylesheet" href="dist/tuicss.min.css"/>
+    <link rel="stylesheet" href="style.css"></link>
     <script src="dist/tuicss.min.js"></script>
-    <script src="penger.js"></script>
-    <script defer src="script.js"></script>
-    <style>
-      body {
-        height: 100dvh;
-        width: 100%;
-      }
-
-      .main {
-        height: 100%;
-        min-height: 100dvh;
-
-        &.penger-wallpaper {
-          background-image: url("assets/all-the-pengers.gif");
-        }
-      }
-
-      .content {
-        padding: 40px;
-        padding-top: 45px;
-        display: flex;
-        gap: 30px;
-        max-width: 1200px;
-        margin: auto;
-        height: 100%;
-        max-height: 1000px;
-      }
-
-      .experience {
-        flex: 11;
-
-        fieldset {
-          height: 100%;
-          overflow: auto;
-        }
-      }
-
-      .tui-nav {
-        display: flex;
-        gap: 12px;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .left {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        flex: 5;
-        min-height: 0;
-      }
-
-      .experience-content {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .company {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 20px;
-        margin-bottom: 30px;
-      }
-
-      .company-info {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-      }
-
-      .company-details {
-        display: grid;
-        grid-template-rows: auto 1fr;
-        gap: 10px;
-      }
-
-      .past-job {
-        .desc {
-          font-style: italic;
-        }
-
-        img {
-          image-rendering: pixelated;
-        }
-
-        ul {
-          padding-left: 20px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-
-          li::before {
-            content: "\25A0";
-            margin-right: 8px;
-          }
-        }
-      }
-
-      .tui-button-img {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        vertical-align: middle;
-        padding: 6px 10px;
-      }
-
-      .tui-button svg {
-        flex-shrink: 0;
-        pointer-events: none;
-      }
-
-      .confirmation-modal {
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: fit-content;
-      }
-
-      .left img {
-        max-width: 100%;
-        height: auto;
-      }
-
-      .short-date {
-        display: none;
-      }
-
-      .full-date {
-        display: inline-block;
-      }
-
-      .penger {
-        flex: 1;
-        min-height: 0;
-        max-height: 300px;
-
-        fieldset {
-          display: flex;
-          justify-content: center;
-          height: 100%;
-        }
-
-        #penger_canvas {
-          width: 100%;
-          height: 100%:
-        }
-      }
-
-      .company-details span {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-      }
-
-      .tui-sidenav-button {
-        display: none !important;
-      }
-
-      .tui-sidenav {
-        height: unset;
-        min-width: 150px;
-      }
-
-      .section {
-        display: none;
-      }
-
-      .section.active {
-        display: flex;
-        height: 100%;
-      }
-
-      .projects-grid {
-        display: grid;
-        padding-right: 15px;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        max-height: calc(100dvh - 90px);
-        padding: 20px 0;
-        gap: 20px;
-        overflow-y: auto;
-        grid-template-areas:
-          "ex1 ex2 ex3"
-          "ex4 penger_game ex5"
-          "ex6 ex7 ex8";
-
-        fieldset:hover {
-          cursor: pointer;
-        }
-
-        #ex1 {
-          grid-area: ex1;
-        }
-
-        #ex2 {
-          grid-area: ex2;
-        }
-
-        #ex3 {
-          grid-area: ex3;
-        }
-
-        #ex4 {
-          grid-area: ex4;
-        }
-
-        #ex5 {
-          grid-area: ex5;
-        }
-
-        #ex6 {
-          grid-area: ex6;
-        }
-
-        #ex7 {
-          grid-area: ex7;
-        }
-
-        #ex8 {
-          grid-area: ex8;
-        }
-
-        #penger_game {
-          grid-area: penger_game;
-        }
-
-        > .tui-window {
-          display: flex;
-          flex-direction: column;
-          min-height: 0;
-          min-width: 0;
-        }
-
-        fieldset {
-          flex: 1;
-          min-height: 0;
-          display: flex;
-          flex-direction: column;
-        }
-
-        img:not(#penger_img) {
-          flex: 1;
-          min-height: 0;
-          object-fit: contain;
-          max-width: 100%;
-        }
-
-        canvas {
-          flex: none;
-          align-self: center;
-          max-width: 100%;
-        }
-      }
-
-      /* @media screen and (max-width: 576px) { */
-      /*   #projects-section.active { */
-      /*     display: block; */
-      /*     height: calc(100dvh - 90px); */
-      /*   } */
-      /**/
-      /*   .projects-grid { */
-      /*     fieldset { */
-      /*       font-size: xx-small; */
-      /*     } */
-      /**/
-      /*     .tui-shadow-2 { */
-      /*       box-shadow: 10px 10px #000 !important; */
-      /*     } */
-      /*   } */
-      /**/
-      /*   .content { */
-      /*     height: 100%; */
-      /*     justify-content: center; */
-      /*   } */
-      /* } */
-
-      /* @media screen and (max-width: 768px) { */
-      /*   canvas#penger_canvas { */
-      /*     min-height: 150px; */
-      /*     max-height: 150px; */
-      /*   } */
-      /**/
-      /*   .left { */
-      /*     max-height: unset; */
-      /*   } */
-      /**/
-      /*   .tui-nav { */
-      /*     .tui-dropdown { */
-      /*       display: none; */
-      /*     } */
-      /*   } */
-      /**/
-      /*   .tui-sidenav-button { */
-      /*     display: inline-block !important; */
-      /*   } */
-      /**/
-      /*   .full-date { */
-      /*     display: none; */
-      /*   } */
-      /**/
-      /*   .short-date { */
-      /*     display: inline-block; */
-      /*   } */
-      /**/
-      /*   .content { */
-      /*     flex-direction: column; */
-      /*     padding: 40px 30px; */
-      /*     gap: 30px; */
-      /*   } */
-      /**/
-      /*   .left, .experience { */
-      /*     flex: none; */
-      /*     width: 100%; */
-      /*     max-width: 100%; */
-      /*   } */
-      /**/
-      /*   .experience { */
-      /*     max-height: none; */
-      /*   } */
-      /**/
-      /*   .company { */
-      /*     grid-template-columns: 1fr; */
-      /*     gap: 10px; */
-      /*   } */
-      /**/
-      /*   .company-details { */
-      /*     gap: 5px; */
-      /*   } */
-      /**/
-      /*   #main_background:has(#home-section.active) { */
-      /*     .tui-statusbar { */
-      /*       position: relative !important; */
-      /*     } */
-      /*   } */
-      /**/
-      /*   .main { */
-      /*     height: auto; */
-      /*     min-height: 100dvh; */
-      /*   } */
-      /* } */
-    </style>
+    <script src="script.js"></script>
   </head>
   <body>
     <div id="modal" class="tui-modal confirmation-modal">
@@ -574,63 +233,137 @@
 
       <div id="projects-section" class="section">
           <div class="content">
-            <div class="projects-grid">
-              <div id="penger_game" style="display: flex; flex: 1; justify-content: center; align-items: center;">
-                <img src="assets/sleepger.gif" width="80" height="80" id="penger_img">
-              </div>
-
-              <div class="tui-window tui-shadow-2 cyan-168" id="ex1">
+            <div class="projects-grid" id="projects_grid">
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex1" onclick="select_project(event)">
                 <fieldset class="tui-fieldset tui-border-solid">
                   <legend>Bezier curve visualiser</legend>
+                  <button class="tui-fieldset-button" onclick="minimize_window(event)"><span class="green-255-text">↕</span></button>
                   <img src="assets/bezier_demo.gif"/>
+                  <div class="project-info">
+                    <h2>About</h2>
+                    <p> Something I did on a whim after watching this <a href="https://www.youtube.com/watch?v=aVwxzDHniEw" target="_blank">video</a> by Freya Holmer. </p>
+                    <p> I was really intrigued by the idea that you can draw a curve by simply performing a series of linear interpolation operations over a set of points.</p>
+                    <h2>Clone the project</h2>
+                    <p>git clone git@github.com:trieu-h/bezier.git</p>
+                    <p>npm i</p>
+                    <p>npm run dev</p>
+                    <p>open index.html</p>
+                    <h2>Live demo</h2>
+                    <a href="https://trieu-h.github.io/bezier/" target="_blank">https://trieu-h.github.io/bezier/</a>
+                  </div>
                 </fieldset>
               </div>
 
-              <div class="tui-window tui-shadow-2 cyan-168" id="ex2">
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex2" onclick="select_project(event)">
                 <fieldset class="tui-fieldset tui-border-solid">
                   <legend>Mandelbrot set visualiser</legend>
+                  <button class="tui-fieldset-button" onclick="minimize_window(event)"><span class="green-255-text">↕</span></button>
                   <img src="assets/mandelbrot.png">
+                  <div class="project-info">
+                    <h2>About</h2>
+                    <p>Mandelbrot set implementation in C using Raylib</p>
+                    <h2>Clone the project</h2>
+                    <p>git clone git@github.com:trieu-h/mandelbrot.git</p>
+                    <p>gcc main.c -o main.exe -I include/ -L lib/ -lraylib -lwinmm -lopengl32 -lgdi32</p>
+                    <p>./main.exe</p>
+                  </div>
                 </fieldset>
               </div>
 
-              <div class="tui-window tui-shadow-2 cyan-168" id="ex3">
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex3" onclick="select_project(event)">
                 <fieldset class="tui-fieldset tui-border-solid">
                   <legend>Floyd–Steinberg dithering</legend>
+                  <button class="tui-fieldset-button" onclick="minimize_window(event)"><span class="green-255-text">↕</span></button>
                   <img src="assets/dithering.png">
+                  <div class="project-info">
+                    <h2>About</h2>
+                    <p>A small JS program that is meant to demonstrate Floyd-Steinberg <a href="https://en.wikipedia.org/wiki/Dither" target="_blank">dithering </a> algorithm</p>
+                    <h2>Clone the project</h2>
+                    <p>git clone git@github.com:trieu-h/dith.git</p>
+                    <p>open index.html</p>
+                    <h2>Live demo</h2>
+                    <a href="https://trieu-h.github.io/dith/" target="_blank">https://trieu-h.github.io/dith/</a>
+                  </div>
                 </fieldset>
               </div>
 
-              <div class="tui-window tui-shadow-2 cyan-168" id="ex4">
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex4" onclick="select_project(event)">
                 <fieldset class="tui-fieldset tui-border-solid">
                   <legend>Terminal minesweeper</legend>
+                  <button class="tui-fieldset-button" onclick="minimize_window(event)"><span class="green-255-text">↕</span></button>
                   <img src="assets/minesweeper.gif">
+                  <div class="project-info">
+                    <h2>About</h2>
+                    <p>Since MacOS does not come with Minesweeper, I wanted to try and implement a version of it myself. My goal was to make it playable on the terminal since I mostly do my coding there.</p>
+                    <p>This is also my first program written in Go because I wanted to play around with it a little bit.</p>
+                    <h2>Clone the project</h2>
+                    <p>git clone git@github.com:trieu-h/minesweeper-go.git</p>
+                    <p>go build</p>
+                    <p>./minesweeper</p>
+                  </div>
                 </fieldset>
               </div>
 
-              <div class="tui-window tui-shadow-2 cyan-168" id="ex5">
+              <div id="penger">
+                <img src="assets/sleepger.gif" width="50" height="50" id="penger_img">
+              </div>
+
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex5" onclick="select_project(event)">
                 <fieldset class="tui-fieldset tui-border-solid">
                   <legend>Terminal particles</legend>
+                  <button class="tui-fieldset-button" onclick="minimize_window(event)"><span class="green-255-text">↕</span></button>
                   <img src="assets/particles.gif">
+                  <div class="project-info">
+                    <h2>About</h2>
+                    <p>A simple implementation of particles using the classic <a href="https://en.wikipedia.org/wiki/Curses_(programming_library)" target="_blank">curses </a> library</p>
+                    <h2>Clone the project</h2>
+                    <p>git clone git@github.com:trieu-h/particles.git</p>
+                    <p>make</p>
+                    <p>./main</p>
+                  </div>
                 </fieldset>
               </div>
 
-              <div class="tui-window tui-shadow-2 cyan-168" id="ex6">
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex6" onclick="select_project(event)">
                 <fieldset class="tui-fieldset tui-border-solid">
                   <legend>JSON visualiser</legend>
+                  <button class="tui-fieldset-button" onclick="minimize_window(event)"><span class="green-255-text">↕</span></button>
                   <img src="assets/json_visualiser.gif">
+                  <div class="project-info">
+                    <h2>About</h2>
+                    <p>This project consists of two smaller programs:</p>
+                    <p>•A <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser" target="_blank">recursive descent</a> JSON parser</p>
+                    <p>•A Javascript + Canvas implementation that takes the parsed JSON and visualise it as a <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing" target="_blank">force-directed</a> graph</p>
+                    <h2>Clone the project</h2>
+                    <p>git clone git@github.com:trieu-h/json-visualiser.git</p>
+                    <p>open index.html</p>
+                    <h2>Live demo</h2>
+                    <a href="https://trieu-h.github.io/json-visualiser/" target="_blank">https://trieu-h.github.io/json-visualiser/</a>
+                  </div>
                 </fieldset>
               </div>
 
-              <div class="tui-window tui-shadow-2 cyan-168" id="ex7">
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex7" onclick="select_project(event)">
                 <fieldset class="tui-fieldset tui-border-solid">
                   <legend>Bouncing ball physics</legend>
+                  <button class="tui-fieldset-button" onclick="minimize_window(event)"><span class="green-255-text">↕</span></button>
                   <img src="assets/bouncing-balls.gif">
+                  <div class="project-info">
+                    <h2>About</h2>
+                    <p>Pretty much covers the first chapter of the book <a href="https://www.goodreads.com/book/show/30214595-foundations-of-physically-based-modeling-and-animation" target="_blank">Foundations of Physically Based Modeling and Animation</a></p>
+                    <h2>Clone the project</h2>
+                    <p>git clone git@github.com:trieu-h/bouncing-balls.git</p>
+                    <p>open index.html</p>
+                    <h2>Live demo</h2>
+                    <a href="https://trieu-h.github.io/bouncing-balls/" target="_blank">https://trieu-h.github.io/bouncing-balls/</a>
+                  </div>
                 </fieldset>
               </div>
 
-              <div class="tui-window tui-shadow-2 cyan-168" id="ex8" style="transform: perspective(400px) scaleZ(1) translateZ(-100px);">
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex8" onclick="select_project(event)">
                 <fieldset class="tui-fieldset tui-border-solid">
-                  <legend>Particle system in terminal</legend>
+                  <legend>K-means Image Clustering</legend>
+                  <button class="tui-fieldset-button" onclick="minimize_window(event)"><span class="green-255-text">↕</span></button>
                   <img src="assets/particles.gif">
                 </fieldset>
               </div>
