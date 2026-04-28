@@ -157,16 +157,6 @@ function initProjectsPage() {
     }, 10)
   }
 
-  const ex1 = document.getElementById("ex1");
-  const ex2 = document.getElementById("ex2");
-  const ex3 = document.getElementById("ex3");
-  const ex4 = document.getElementById("ex4");
-  const ex5 = document.getElementById("ex5");
-  const ex6 = document.getElementById("ex6");
-  const ex7 = document.getElementById("ex7");
-  const ex8 = document.getElementById("ex8");
-  const penger_img = document.getElementById("penger_img");
-
   document.addEventListener("mousemove", (e) => {
     const { left: ex1_left, width: ex1_width, top: ex1_top } = ex1.getBoundingClientRect();
     const { left: ex3_left, width: ex3_width } = ex3.getBoundingClientRect();
@@ -274,7 +264,6 @@ function minimize_window(e) {
   for (let i = 0; i < all_exs.length; i++) {
     if (all_exs[i] === current_target) continue;
     all_exs[i].style.display = "flex";
-    all_exs[i].style.transition = "all 0.5s linear";
     all_exs[i].style.transform  = `translate${axis[i]}(${value * dir[i]}%)`;
   }
 
@@ -282,8 +271,13 @@ function minimize_window(e) {
 
   for (let i = 0; i < all_exs.length; i++) {
     if (all_exs[i] === current_target) continue;
-    all_exs[i].style.transition = "all 0.5s linear";
-    all_exs[i].style.transform  = `translate${axis[i]}(0)`;
+    all_exs[i].style.transform  = `perspective(400px) scaleZ(1) translateZ(0px) translate${axis[i]}(0)`;
+  }
+
+  void ex1.offsetWidth;
+
+  for (let i = 0; i < all_exs.length; i++) {
+    all_exs[i].style.transition = "unset";
   }
 
   penger.style.display = "flex";
