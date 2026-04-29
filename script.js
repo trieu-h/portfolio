@@ -58,6 +58,20 @@ function showSection(sectionName) {
 
 function initHomePage() {
   const ctx = penger_canvas.getContext('2d');
+  let w, h, penger_size;
+
+  function resize_canvas() {
+    const rect = penger_canvas.getBoundingClientRect();
+    penger_canvas.width = rect.width;
+    penger_canvas.height = rect.height;
+    w = penger_canvas.width;
+    h = penger_canvas.height;
+    penger_size = w/10;
+    paddle_area_w = paddle_area.offsetWidth;
+  }
+  resize_canvas();
+  window.addEventListener('resize', resize_canvas);
+
   const penger_img = new Image();
 
   penger_img.onload = function() {
@@ -66,12 +80,7 @@ function initHomePage() {
     let x_dir = 1; let y_dir = 1;
 
     const renderOneFrame = () => {
-      let penger_size = 40;
-      const w = penger_canvas.width;
-      const h = penger_canvas.height;
       ctx.clearRect(0, 0, w, h);
-
-      if (h < 40) penger_size = 15;
 
       if (x + penger_size >= w) {
         x_dir = -1;
@@ -92,17 +101,6 @@ function initHomePage() {
   };
 
   penger_img.src = "assets/jetger.gif";
-
-  const resizeCanvas = () => {
-    const rect = penger_canvas.getBoundingClientRect();
-    penger_canvas.width = rect.width;
-    penger_canvas.height = rect.height;
-
-    paddle_area_w = paddle_area.offsetWidth;
-  };
-
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
 }
 
 function initProjectsPage() {
